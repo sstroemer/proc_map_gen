@@ -16,10 +16,12 @@ def main():
     print("[1] Basic cellular automaton.")
     print("[2] Stochastic cellular automaton.")
 
-    selection = input("Which one should I use? ")
+    selection = int(input("Which one should I use? "))
 
-    if selection == 1: algo_ca.run(map)
-    if selection == 2: algo_sca.run(map)
+    if selection == 1:
+        algo_ca.run(map)
+    if selection == 2:
+        algo_sca.run(map)
 
     print_map(map)
 # ------------------------------------------------------------------------------------------------------------- end main

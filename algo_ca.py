@@ -21,13 +21,19 @@ def run(map):
         for y in range(height):
             map[x][y] = 1 if (random.random() < CA_INITIAL_PERCENTAGE) else 0
 
+    fix_map(map)
+
     # we now apply a modified smoothing that reduces the chance of single big caves
     for i in range(CA_PRE_RUNS):
         pre_smooth(map)
+#        fix_map(map)
 
     # now the final smoothing
     for i in range(CA_SMOOTH_RUNS):
         smooth(map)
+#        fix_map(map)
+
+    fix_map(map)
 
 
 # ----------------------------------------------------------------------------------------------------------- PRE SMOOTH
@@ -69,3 +75,17 @@ def neighbours(map, x, y):
 
     return nb
 
+
+def fix_map(map):
+    width = len(map)
+    height = len(map[0])
+
+    tmp = copy.deepcopy(map)
+
+    for x in range(width):
+        map[x][0] = 1
+        map[x][height-1] = 1
+
+    for y in range(height):
+        map[0][y] = 1
+        map[width-1][y] = 1
